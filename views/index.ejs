@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Unit 2 Assessment Prep</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Car Collection</h1>
+    <% if (cars.length === 0) { %>
+      <p>There are no Cars in your collection yet!</p>
+    <% } %>
+    <ul>
+      <% cars.forEach((car, idx) => { %>
+        <li>
+          <%= car.make %>
+          <%= car.model %>
+          -
+          <%= car.fullTank ? 'Full' : 'Empty' %>
+          <form action="/cars/<%= idx %>?_method=DELETE" method="POST">
+            <button type="submit">X</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+
+    <hr>
+    <form class="add" action="/cars" method="POST">
+      <label>Make</label>
+      <input name="make" type="text">
+      <label>Model</label>
+      <input name="model" type="text">
+      <button class="add-btn" type="submit">ADD CAR</button>
+    </form>
   </body>
 </html>
